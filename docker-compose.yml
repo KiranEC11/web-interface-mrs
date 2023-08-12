@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  web:
+    container_name: movie_rec
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src
+    working_dir: /usr/src
+    ports:
+      - 8000:8000
+    command:  python3 manage.py runserver 0.0.0.0:8000

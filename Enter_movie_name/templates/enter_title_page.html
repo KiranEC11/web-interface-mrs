@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load static %} <!-- Load the static template tag library -->
+{% block page_content %}
+
+<style>
+    body {
+        /* Set the font color to white */
+        color: white;
+    }
+
+    /* Add a background image */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('{% static "netflix.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.6; /* Adjust the opacity to your preference */
+        z-index: -1;
+    }
+
+    /* Custom form styles */
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-label {
+        width: 300px;
+        margin-right: 10px;
+    }
+
+    /* Additional styles specific to the second HTML file */
+    .col-md-7 {
+        margin-top: 30px;
+    }
+
+    /* Center the form horizontally */
+    .offset-md-0 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Add spacing between form elements */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Center the buttons */
+    .col-md-4 {
+        text-align: center;
+    }
+
+    /* Style the "Submit" button with green color */
+    .btn-submit {
+        background-color: #28a745; /* Green color */
+        color: white;
+    }
+
+    /* Style the "Reset" button with red color */
+    .btn-reset {
+        background-color: #dc3545; /* Red color */
+        color: white;
+    }
+</style>
+
+<div class="col-md-7 offset-md-0">
+
+    <br>
+    <h3>Movie Recommendation System</h3>
+    <br>
+    <form action="/recommendations/" method="post" target="_blank">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <!-- <label for="Title" class="form-label">Enter Movie Title:</label> -->
+            {{ form.Title }}
+        </div>
+
+        <div class="col-md-4 offset-md-4">
+            <!-- Submit button with green color -->
+            <button type="submit" class="btn btn-submit">Submit</button>
+            <!-- Reset button with red color -->
+            <input type="reset" class="btn btn-reset" value="Reset" />
+        </div>    
+    </form>
+</div>
+
+<script>
+    // JavaScript code to reset the form on the client side
+    document.getElementById("TitleForm").addEventListener("reset", function(event) {
+        // Prevent the default form reset behavior
+        event.preventDefault();
+        // Reset the form fields
+        this.reset();
+    });
+</script>
+
+{% endblock %}
